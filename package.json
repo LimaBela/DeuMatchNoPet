@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.0",
+    "postgresql": "^0.0.1"
+  },
+  "name": "deumatchnopet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LimaBela/DeuMatchNoPet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LimaBela/DeuMatchNoPet/issues"
+  },
+  "homepage": "https://github.com/LimaBela/DeuMatchNoPet#readme"
+}
