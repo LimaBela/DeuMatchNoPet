@@ -2,12 +2,17 @@
 
 ## Projeto feito com Node.js + Express + PostgreSQL
 
-Esse projeto consiste em um sistema para cadastro de organizações e doadores de animais, possibilitando a inserção e gerenciamento de animais disponíveis para adoção. 
+Esse projeto consiste em uma plataforma para cadastro de organizações e doadores de animais, possibilitando a inserção e gerenciamento de animais disponíveis para adoção. Assim, sem precisar de cadastro, pessoas podem pesquisar facilmente por animais que desejam adotar.
 
-A plataforma foi implementada com um mecanismo de busca com filtros, permitindo pesquisar os animais cadastrados por região, tipo, porte, raça, idade e características comportamentais. 
+Conta com um mecanismo de pesquisa com filtros, facilitando a busca por animais a serem adotados, além de um questionário personalizado, que gera automaticamente recomendações com base no perfil de animal desejado. 
 
-Além disso, os usuários podem responder a um questionário personalizado, que gera recomendações com base no perfil informado. 
 
-O sistema também irá disponibilizar perfis detalhados dos animais e páginas informativas sobre adoção. 
+## Setup
 
-É importante ressaltar que o sistema proposto se encarrega apenas da divulgação, não intermediando o contato entre as partes envolvidas.
+1. Instale node.js e postgreSQL (com pgAdmin pra facilitar criação do banco se necessário)
+2. Clone o repositório
+3. Rode `npm install` na pasta raíz do projeto
+4. Copie `.env.example` para `.env` e configure com os dados do banco
+5. Crie o banco de dados com o arquivo database.sql
+5. Rode o servidor com `node index.js`
+

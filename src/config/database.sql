@@ -8,12 +8,12 @@ CREATE TABLE doador (
 	numero TEXT NOT NULL,
 	email TEXT NOT NULL,
 	foto TEXT NULL
+	emailLogin INT REFERENCES login(emailLogin)
 );
 
 CREATE TABLE login (
 	emailLogin TEXT PRIMARY KEY NOT NULL,
 	senha TEXT NOT NULL,
-	idDoador INT REFERENCES doador(idDoador)
 );
 
 CREATE TABLE especie (
