@@ -2,7 +2,7 @@ const pool = require('../config/db.js');
 
 class Especie
 {
-    static async criar(especie) 
+    static async create(especie) 
     {
         const {nomeEspecie} = especie;
         const res = await pool.query
@@ -14,3 +14,5 @@ class Especie
     }
     
 }
+
+module.exports = Especie;

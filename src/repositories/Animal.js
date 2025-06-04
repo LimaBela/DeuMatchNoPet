@@ -1,8 +1,8 @@
-const pool = require('../config/db.js');
+const pool = require('../config/db');
 
 class Animal
 {
-    static async criar(animal) 
+    static async create(animal) 
     {
         const {nome, dataNasc, comportamento, estadoSaude, porte, status, descricao, foto, doador_id, nomeEspecie, nomeRaca} = animal;
         const res = await pool.query
@@ -14,3 +14,5 @@ class Animal
     }
     
 }
+
+module.exports = Animal;

@@ -1,5 +1,10 @@
 CREATE DATABASE deumatchnopet;
 
+CREATE TABLE login (
+	emailLogin TEXT PRIMARY KEY NOT NULL,
+	senha TEXT NOT NULL
+);
+
 CREATE TABLE doador (
 	idDoador INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	nome TEXT NOT NULL,
@@ -7,13 +12,8 @@ CREATE TABLE doador (
 	CEP TEXT NOT NULL,
 	numero TEXT NOT NULL,
 	email TEXT NOT NULL,
-	foto TEXT NULL
-	emailLogin INT REFERENCES login(emailLogin)
-);
-
-CREATE TABLE login (
-	emailLogin TEXT PRIMARY KEY NOT NULL,
-	senha TEXT NOT NULL,
+	foto TEXT NULL,
+	emailLogin TEXT REFERENCES login(emailLogin)
 );
 
 CREATE TABLE especie (

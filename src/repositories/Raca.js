@@ -1,8 +1,8 @@
-const pool = require('../config/db.js');
+const pool = require('../config/db');
 
 class Raca
 {
-    static async criar(raca) 
+    static async create(raca) 
     {
         const {nomeRaca} = raca;
         const res = await pool.query
@@ -14,3 +14,5 @@ class Raca
     }
     
 }
+
+module.exports = Raca;

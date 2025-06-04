@@ -2,7 +2,7 @@ const pool = require('../config/db.js');
 
 class Login
 {
-    static async criar(login) 
+    static async create(login) 
     {
         const {emailLogin, senha} = login;
         const res = await pool.query
@@ -12,5 +12,17 @@ class Login
         );
         return res.rows[0];
     }
+
+    static async read(login) 
+    {
+        const {emailLogin} = login;
+        const res = await pool.query
+        (
+            'SELECT * FROM login WHERE emailLogin = $1',[emailLogin]
+        );
+        return res.rows[0];
+    }
     
 }
+
+module.exports = Login;

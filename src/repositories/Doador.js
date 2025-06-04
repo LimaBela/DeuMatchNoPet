@@ -1,8 +1,8 @@
-const pool = require('../config/db.js');
+const pool = require('../config/db');
 
 class Doador
 {
-    static async criar(doador) 
+    static async create(doador) 
     {
         const {nome, cep, numero, telefone, emailContato, foto, emailLogin} = doador;
         const res = await pool.query
@@ -14,3 +14,5 @@ class Doador
     }
     
 }
+
+module.exports = Doador;
