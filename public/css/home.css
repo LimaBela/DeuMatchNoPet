@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Coiny&family=Concert+One&display=swap');
+
+:root {
+    --roxo: #412973;
+    --branco: white;
+    --rosa: #b1476d;
+    --laranja: #eb9064;
+    --roxo_claro: #bc9ded;
+}
+
+.flip-horizontal {
+    transform: scaleX(-1);
+}
+
+.btn-roxo {
+    background-color: var(--roxo) !important;
+    color: var(--branco) !important;
+}
+
+.roxo {
+    background-color: var(--roxo);
+}
+
+.laranja {
+    background-color: var(--laranja);
+}
+
+.rosa {
+    background-color: var(--rosa);
+}
+
+.slogan {
+    background-image: url('../imagens/patas.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.sobre {
+    background-image: url('../imagens/colorido.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Login */
+
+/* Fundo que cobre toda a tela */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Branco com leve transparência */
+    z-index: 1050;
+    display: none;
+    /* Começa escondido */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Caixa de conteúdo */
+.overlay-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+}

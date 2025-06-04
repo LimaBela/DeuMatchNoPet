@@ -1,0 +1,18 @@
+:root {
+    --roxo: #412973;
+    --branco: white;
+    --rosa: #b1476d;
+    --laranja: #eb9064;
+    --roxo_claro: #bc9ded;
+}
+
+@media (max-width: 767.98px) {
+    .btn.btn-rosa {
+        background-color: var(--rosa) !important;
+        /* Rosa */
+    }
+
+    .coluna-3 {
+        min-height: 50vh;
+    }
+}
