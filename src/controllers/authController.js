@@ -49,7 +49,7 @@ exports.signup = async (req, res) =>
     console.error('Erro no cadastro de login:', loginErr);
     return res.status(400).send('Erro de cadastro de login');
   } 
-  console.log(loginRes);
+  
   const id_login = loginRes.id_login;
 
   const [doadorErr] = await safe(doadorRepo.create({nome, cep, numero, telefone, email_contato, foto: null, id_login}));
@@ -64,7 +64,9 @@ exports.signup = async (req, res) =>
     return res.status(400).send('Erro de cadastro de doador');
   }     
 
-  return res.status(200).json({ mensagem: 'Cadastro bem-sucedido!' });
+  req.session.userId = id_login;
+
+  return res.redirect('/meu_perfil.html');
 };
 
 exports.forgotPassword = (req, res) => 
