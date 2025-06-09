@@ -3,7 +3,7 @@ const session = require('express-session');
 const sessionConfig = require('./config/session');
 const authRoutes = require('./routes/authRoutes');
 const path = require('path');
-const pool = require('./config/db')
+const pool = require('./config/db');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));

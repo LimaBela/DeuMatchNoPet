@@ -1,26 +1,30 @@
+const loginRepo = require('../repositories/Login');
+const doadorRepo = require('../repositories/Doador');
+const bcrypt = require('bcrypt');
+const { safe } = require('../utils');
 
 exports.login = async (req, res) => 
 {
   try 
   {
-    const loginRepo = require('../repositories/Login');
-    
-    const { emailForm, senhaForm } = req.body;
+    const { email_login, senha} = req.body;
 
-    if (!emailForm || !senhaForm) 
-      return res.status(400).json({ mensagem: 'Campos obrigatórios' });
+    if (!email_login|| !senha) 
+      return res.status(400).json({ mensagem: 'Campos obrigatórios ausentes!' });
 
-    const resultado = await loginRepo.read(emailForm);
+    const resultado = await loginRepo.read(email_login); //checa se o email existe e se sim, retorna a senha
 
     if (!resultado) 
-      return res.status(404).json({ mensagem: 'Usuário não encontrado' });
+      return res.status(404).json({ mensagem: 'Usuário ou senha incorretos' });
     
-    const {emailLogin: emailDB, senha: senhaDB} = resultado;
+    const senhaCorreta = await bcrypt.compare(senha, resultado.senha);
 
-    if(emailForm === emailDB && senhaForm === senhaDB)
-      return res.status(200).json({ mensagem: 'Login bem-sucedido' });
-    else
-      res.status(401).send('Credenciais inválidas');
+    if(!senhaCorreta)
+      return res.status(401).send('Credenciais inválidas');
+
+    req.session.userId = resultado.id_login;
+
+    return res.redirect('/meu_perfil.html');
   }
   catch (error) 
   {
@@ -31,17 +35,36 @@ exports.login = async (req, res) =>
 
 exports.signup = async (req, res) => 
 {
-  try 
+  const { nome, email_login, email_contato, telefone, cep, numero, /*foto,*/ senha} = req.body;
+
+  if (!nome || !email_login || !email_contato || !telefone || !cep || !numero || /*!foto ||*/ !senha)
+    return res.status(400).send('Campos obrigatórios ausentes');
+
+  const hash = await bcrypt.hash(senha, 10);
+
+  const [loginErr, loginRes] = await safe(loginRepo.create({email_login, senha: hash}))
+
+  if(loginErr)
   {
-    const loginRepo = require('../repositories/Login');
-    const doadorRepo = require('../repositories/Doador');
+    console.error('Erro no cadastro de login:', loginErr);
+    return res.status(400).send('Erro de cadastro de login');
+  } 
+  console.log(loginRes);
+  const id_login = loginRes.id_login;
+
+  const [doadorErr] = await safe(doadorRepo.create({nome, cep, numero, telefone, email_contato, foto: null, id_login}));
+  
+  if(doadorErr)
+  {
+    const [rollbackErr] = await safe(loginRepo.delete(email_login));
     
-  }
-  catch (error) 
-  {
-    console.error('Erro no login:', error);
-    res.status(500).send('Erro interno do servidor');
-  }
+    if(rollbackErr) console.error('Erro no rollback do login:', rollbackErr);
+
+    console.error('Erro no cadastro de doador:', doadorErr);
+    return res.status(400).send('Erro de cadastro de doador');
+  }     
+
+  return res.status(200).json({ mensagem: 'Cadastro bem-sucedido!' });
 };
 
 exports.forgotPassword = (req, res) => 

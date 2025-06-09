@@ -139,10 +139,10 @@
             <h2 class="text-roxo">Doador</h2>
             <p class="mb-4">Acesse para gerenciar suas doações.</p>
 
-            <form>
+            <form action="/api/auth/login" method="post">
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Digite seu email">
+                    <input type="email" class="form-control" name="email_login" placeholder="Digite seu email">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Senha</label>
@@ -164,23 +164,22 @@
             <button class="btn-close position-absolute top-0 end-0 m-3" onclick="fecharCadastro()"></button>
             <h2 class="text-roxo">Crie sua conta!</h2>
 
-            <form action="/enviar" method="POST">
+            <form action="/api/auth/signup" method="post">
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
                     <input type="text" class="form-control" name="nome" placeholder="Digite seu nome">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email de Login</label>
-                    <input type="email" class="form-control" name="email" placeholder="Digite seu email usado como login">
+                    <input type="email" class="form-control" name="email_login" placeholder="Digite seu email usado como login">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email de Contato</label>
-                    <input type="email" class="form-control" name="email" placeholder="Digite seu email usado para contato">
+                    <input type="email" class="form-control" name="email_contato" placeholder="Digite seu email usado para contato">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Telefone</label>
-                    <input type="number" class="form-control" name="telefone"
-                        placeholder="Digite seu telefone para contato">
+                    <input type="number" class="form-control" name="telefone" placeholder="Digite seu telefone para contato">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">CEP</label>
@@ -191,13 +190,12 @@
                     <input type="number" class="form-control" name="numero" placeholder="Digite o número de endereço">
                 </div>
                 <div class="mb-3">
-                    <label for="inputFoto" class="form-label">Foto</label>
-                    <input class="form-control" type="file" id="inputFoto" name="foto" accept="image/*">
+                    <!-- <label for="inputFoto" class="form-label">Foto</label> -->
+                    <!-- <input class="form-control" type="file" id="inputFoto" name="foto" accept="image/*"> -->
                 </div>
                 <div class="mb-3 position-relative">
                     <label class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senhaCadastro" placeholder="Defina uma senha">
-
+                    <input type="password" class="form-control" name="senha" id="senhaCadastro" placeholder="Defina uma senha">
                     <button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2"
                         onclick="toggleSenhaCadastro()" style="background: transparent;">
                         <i id="iconeOlho" class="bi bi-eye-fill"></i>
