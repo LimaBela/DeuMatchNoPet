@@ -14,7 +14,7 @@ CREATE TABLE doador (
 	numero TEXT NOT NULL,
 	email_contato TEXT NOT NULL,
 	foto TEXT NULL,
-	id_login INT NOT NULL REFERENCES login(id_login) ON DELETE CASCADE
+	id_login INT UNIQUE NOT NULL REFERENCES login(id_login) ON DELETE CASCADE
 );
 
 CREATE TABLE especie (

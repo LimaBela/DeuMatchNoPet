@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const sessionConfig = require('./config/session');
 const authRoutes = require('./routes/authRoutes');
+const protectedRoutes = require('./routes/protectedRoutes');
 const path = require('path');
 const pool = require('./config/db');
 const app = express();
@@ -10,10 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session(sessionConfig));
 app.use('/api/auth', authRoutes);
+app.use('/', protectedRoutes);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.get('/', (_, res) => 
+app.get('/home', (_, res) => 
 {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });

@@ -5,32 +5,33 @@ const { safe } = require('../utils');
 
 exports.login = async (req, res) => 
 {
-  try 
-  {
-    const { email_login, senha} = req.body;
+  const { email_login, senha} = req.body;
 
-    if (!email_login|| !senha) 
-      return res.status(400).json({ mensagem: 'Campos obrigatórios ausentes!' });
+  if (!email_login|| !senha) 
+    return res.status(400).json({ mensagem: 'Campos obrigatórios ausentes!' });
 
-    const resultado = await loginRepo.read(email_login); //checa se o email existe e se sim, retorna a senha
+  const [loginErr, loginRes] = await safe(loginRepo.read(email_login)); //checa se o email existe e se sim, retorna id_login e senha
 
-    if (!resultado) 
-      return res.status(404).json({ mensagem: 'Usuário ou senha incorretos' });
-    
-    const senhaCorreta = await bcrypt.compare(senha, resultado.senha);
-
-    if(!senhaCorreta)
-      return res.status(401).send('Credenciais inválidas');
-
-    req.session.userId = resultado.id_login;
-
-    return res.redirect('/meu_perfil.html');
-  }
-  catch (error) 
+  if (loginErr) 
   {
     console.error('Erro no login:', error);
-    res.status(500).send('Erro interno do servidor');
+    return res.status(401).send('Erro de servidor');
   }
+    
+  const [senhaErr, senhaRes] = await safe(bcrypt.compare(senha, loginRes.senha));
+
+  if(senhaErr)
+  {
+    console.error('Erro no login:', error);
+    return res.status(401).send('Erro de servidor');
+  }
+    
+  if(!senhaRes)
+    return res.status(401).send({ mensagem: 'Usuário ou senha incorretos' });
+
+  req.session.userID = loginRes.id_login;
+
+  return res.redirect('/meu_perfil');
 };
 
 exports.signup = async (req, res) => 
@@ -64,9 +65,9 @@ exports.signup = async (req, res) =>
     return res.status(400).send('Erro de cadastro de doador');
   }     
 
-  req.session.userId = id_login;
+  req.session.userID = id_login;
 
-  return res.redirect('/meu_perfil.html');
+  return res.redirect('/meu_perfil');
 };
 
 exports.forgotPassword = (req, res) => 
