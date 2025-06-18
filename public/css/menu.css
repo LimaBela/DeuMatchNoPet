@@ -166,7 +166,6 @@ body {
     border-radius: 10px;
 }
 
-/* Convite fixo */
 .convite-fixo {
     position: fixed;
     bottom: 20px;
@@ -191,3 +190,29 @@ body {
     color: #4b0082;
     font-weight: 600;
 }
+
+.div-bonito {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 2px solid #c084fc;
+    border-radius: 30px;
+    padding: 10px 25px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: background-color 0.3s;
+}
+
+.div-bonito:hover {
+    background-color: #f5e8ff;
+}
+
+.div-bonito p {
+    margin: 0;
+    font-size: 20pt;
+    color: #4b0082;
+    font-weight: 600;
+}
+

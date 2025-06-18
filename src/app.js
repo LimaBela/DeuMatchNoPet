@@ -10,15 +10,17 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session(sessionConfig));
-app.use('/api/auth', authRoutes);
-app.use('/', protectedRoutes);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.get('/home', (_, res) => 
-{
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-});
+// Bootstrap via NPM
+app.use('/bootstrap', express.static(path.join(__dirname, '../node_modules/bootstrap/dist')));
+
+// Bootstrap Icons via NPM
+app.use('/bootstrap-icons', express.static(path.join(__dirname, '../node_modules/bootstrap-icons/font')));
+
+// Tom Select via NPM
+app.use('/tom-select', express.static(path.join(__dirname, '../node_modules/tom-select/dist')));
 
 app.get('/time', async (_, res) => 
 {
@@ -33,5 +35,9 @@ app.get('/time', async (_, res) =>
     res.status(500).send('Erro ao conectar ao banco!');
   }
 });
+
+app.use('/api/auth', authRoutes);
+
+app.use('/', protectedRoutes);
 
 module.exports = app;

@@ -17,6 +17,12 @@ exports.login = async (req, res) =>
     console.error('Erro no login:', error);
     return res.status(401).send('Erro de servidor');
   }
+
+  if (!loginRes || loginRes.length === 0) 
+  {
+    console.error('Email invalido');
+    return res.redirect('/?erro=loginIncorreto');
+  }
     
   const [senhaErr, senhaRes] = await safe(bcrypt.compare(senha, loginRes.senha));
 
@@ -26,8 +32,8 @@ exports.login = async (req, res) =>
     return res.status(401).send('Erro de servidor');
   }
     
-  if(!senhaRes)
-    return res.status(401).send({ mensagem: 'Usuário ou senha incorretos' });
+  if(!senhaRes || senhaRes.length === 0)
+    return res.redirect('/?erro=loginIncorreto');
 
   req.session.userID = loginRes.id_login;
 

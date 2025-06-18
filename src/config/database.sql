@@ -39,7 +39,7 @@ CREATE TABLE animal (
 	porte TEXT NOT NULL,
 	status status_animal NOT NULL,
 	descricao TEXT NOT NULL,
-	foto TEXT NOT NULL,
+	foto TEXT NULL,
 	id_doador INT NOT NULL REFERENCES doador(id_doador) ON DELETE CASCADE,
 	id_especie INT NOT NULL REFERENCES especie(id_especie) ON DELETE CASCADE,
 	id_raca INT NOT NULL REFERENCES raca(id_raca) ON DELETE CASCADE
